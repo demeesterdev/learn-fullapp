@@ -5,29 +5,32 @@
         class="app-bar-item"
         v-for="link in links"
         :key="link.name"
-        :to="link.to">{{ link.name }}</router-link>
+        :to="link.to"
+        >{{ link.name }}
+      </router-link>
     </div>
-    <div class="right-links ">
+    <div class="right-links">
       <a class="app-bar-item" href="#">LOGIN</a>
     </div>
   </div>
 </template>
-<script>export default {
-  data () {
+<script>
+export default {
+  data() {
     return {
       links: [
         {
-          name: 'Posts',
-          to: { name: 'Posts' }
+          name: "Posts",
+          to: { name: "Posts" },
         },
         {
-          name: 'About',
-          to: { name: 'About' }
-        }
-      ]
-    }
-  }
-}
+          name: "User",
+          to: { name: "User" },
+        },
+      ],
+    };
+  },
+};
 </script>
 <style scoped>
 .app-bar {
@@ -42,12 +45,15 @@
   display: block;
   justify-content: space-between;
 }
+
 .left-links {
   padding-left: 10%;
 }
+
 .left-links a {
   float: left;
 }
+
 a {
   float: left;
   display: block;
@@ -57,6 +63,7 @@ a {
   text-decoration: none;
   font-size: 17px;
 }
+
 .right-links {
   float: right;
 }

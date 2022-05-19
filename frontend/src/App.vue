@@ -4,10 +4,10 @@
 </template>
 
 <script>
-import TheApplicationBar from './components/UI/TheApplicationBar.vue'
+import TheApplicationBar from "./components/UI/TheApplicationBar.vue";
 export default {
-  components: { TheApplicationBar }
-}
+  components: { TheApplicationBar },
+};
 </script>
 <style>
 #app {

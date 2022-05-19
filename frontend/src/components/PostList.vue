@@ -5,13 +5,11 @@
   </div>
 </template>
 <script>
-import SinglePost from './SinglePost.vue'
+import SinglePost from "@/components/SinglePost.vue";
 export default {
   components: { SinglePost },
-  props: [
-    'posts'
-  ]
-}
+  props: ["posts"],
+};
 </script>
 <style scoped>
 </style>
