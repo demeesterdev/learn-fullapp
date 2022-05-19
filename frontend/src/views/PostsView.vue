@@ -11,32 +11,11 @@ export default {
   components: {
     PostList,
   },
-  data: function () {
-    return {
-      posts: [
-        {
-          id: 1,
-          user: "demeesterdev",
-          date: "2021-01-19 15:30:30",
-          post: "Today I'm feeling sooooo well.",
-          comments: [
-            {
-              id: 3,
-              user: "idalmasso",
-              date: "2021-01-19 15:31:30",
-              post: "Good For You!!",
-            },
-          ],
-        },
-        {
-          id: 2,
-          user: "cshannon",
-          date: "2021-01-19 15:25:20",
-          post: "I think that I love giraffes",
-        },
-      ],
-    };
-  },
+  computed: {
+    posts() {
+      return this.$store.getters["posts/allPosts"];
+    }
+  }
 };
 </script>
 <style scoped>
