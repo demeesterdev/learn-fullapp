@@ -10,6 +10,9 @@
       >
       <slot name="footer" v-if="expanded"></slot>
     </footer>
+    <div class="actions">
+      <slot name="actions"></slot>
+    </div>
   </div>
 </template>
 <script>

@@ -10,11 +10,16 @@
       </router-link>
     </div>
     <div class="right-links">
-      <a class="app-bar-item" href="#">LOGIN</a>
+      <router-link class="app-bar-item" href="#" v-if="!loggedIn" @click.prevent :to="{ name: 'Login' }"
+        >LOGIN</router-link>
+      <a class="app-bar-item" href="#" v-if="loggedIn" @click.prevent="logoutButtonClicked"
+        >LOGOUT</a
+      >
     </div>
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -25,11 +30,31 @@ export default {
         },
         {
           name: "User",
-          to: { name: "User" },
+          to: {
+            name: "User",
+            params: {
+              userId: this.$store.getters["auth/currentUser"].userName,
+            },
+          },
         },
       ],
     };
   },
+  methods: {
+    ...mapActions({
+      logout: "auth/logout", 
+    }),
+    logoutButtonClicked() {
+      this.logout().then(() => {
+        this.$router.push({ name: "Login" });
+      });
+    }
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters["auth/isLoggedIn"]
+    }
+  }
 };
 </script>
 <style scoped>
