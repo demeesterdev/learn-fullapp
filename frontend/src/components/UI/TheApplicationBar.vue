@@ -3,16 +3,26 @@
     <div class="left-links">
       <router-link
         class="app-bar-item"
-        v-for="link in links"
+        v-for="link in activeLinks"
         :key="link.name"
         :to="link.to"
         >{{ link.name }}
       </router-link>
     </div>
     <div class="right-links">
-      <router-link class="app-bar-item" href="#" v-if="!loggedIn" @click.prevent :to="{ name: 'Login' }"
-        >LOGIN</router-link>
-      <a class="app-bar-item" href="#" v-if="loggedIn" @click.prevent="logoutButtonClicked"
+      <router-link
+        class="app-bar-item"
+        href="#"
+        v-if="!loggedIn"
+        @click.prevent
+        :to="{ name: 'Login' }"
+        >LOGIN</router-link
+      >
+      <a
+        class="app-bar-item"
+        href="#"
+        v-if="loggedIn"
+        @click.prevent="logoutButtonClicked"
         >LOGOUT</a
       >
     </div>
@@ -26,10 +36,12 @@ export default {
       links: [
         {
           name: "Posts",
+          visibleIfLoggedOut: true,
           to: { name: "Posts" },
         },
         {
           name: "User",
+          visibleIfLoggedOut: false,
           to: {
             name: "User",
             params: {
@@ -42,19 +54,24 @@ export default {
   },
   methods: {
     ...mapActions({
-      logout: "auth/logout", 
+      logout: "auth/logout",
     }),
     logoutButtonClicked() {
       this.logout().then(() => {
         this.$router.push({ name: "Login" });
       });
-    }
+    },
   },
   computed: {
     loggedIn() {
-      return this.$store.getters["auth/isLoggedIn"]
-    }
-  }
+      return this.$store.getters["auth/isLoggedIn"];
+    },
+    activeLinks() {
+      return this.links.filter(
+        (link) => link.visibleIfLoggedOut || this.loggedIn
+      );
+    },
+  },
 };
 </script>
 <style scoped>
